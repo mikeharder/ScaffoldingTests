@@ -59,7 +59,8 @@ namespace ScaffoldingTests.Controllers
         // GET: MvcReadWrite/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var person = (from p in _people where p.ID == id select p).SingleOrDefault();
+            return View(person);
         }
 
         // POST: MvcReadWrite/Edit/5
@@ -69,7 +70,11 @@ namespace ScaffoldingTests.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                var person = (from p in _people where p.ID == id select p).SingleOrDefault();
+
+                person.ID = Int32.Parse(collection["ID"]);
+                person.Name = collection["Name"];
+                person.Age = Int32.Parse(collection["Age"]);
 
                 return RedirectToAction(nameof(Index));
             }
