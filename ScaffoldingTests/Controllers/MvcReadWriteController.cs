@@ -91,7 +91,7 @@ namespace ScaffoldingTests.Controllers
         // GET: MvcReadWrite/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(GetPerson(id));
         }
 
         // POST: MvcReadWrite/Delete/5
@@ -101,7 +101,7 @@ namespace ScaffoldingTests.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                _people.Remove(GetPerson(id));
 
                 return RedirectToAction(nameof(Index));
             }
