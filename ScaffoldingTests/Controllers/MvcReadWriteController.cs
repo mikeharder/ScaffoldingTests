@@ -14,6 +14,11 @@ namespace ScaffoldingTests.Controllers
             new Person { ID=0, Name="Default", Age=19 }
         };
 
+        private Person GetPerson(int id)
+        {
+            return (from p in _people where p.ID == id select p).SingleOrDefault();
+        }
+
         // GET: MvcReadWrite
         public ActionResult Index()
         {
@@ -23,7 +28,7 @@ namespace ScaffoldingTests.Controllers
         // GET: MvcReadWrite/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(GetPerson(id));
         }
 
         // GET: MvcReadWrite/Create
@@ -59,8 +64,7 @@ namespace ScaffoldingTests.Controllers
         // GET: MvcReadWrite/Edit/5
         public ActionResult Edit(int id)
         {
-            var person = (from p in _people where p.ID == id select p).SingleOrDefault();
-            return View(person);
+            return View(GetPerson(id));
         }
 
         // POST: MvcReadWrite/Edit/5
@@ -70,7 +74,7 @@ namespace ScaffoldingTests.Controllers
         {
             try
             {
-                var person = (from p in _people where p.ID == id select p).SingleOrDefault();
+                var person = GetPerson(id);
 
                 person.ID = Int32.Parse(collection["ID"]);
                 person.Name = collection["Name"];
