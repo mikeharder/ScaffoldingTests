@@ -39,7 +39,14 @@ namespace ScaffoldingTests.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                var person = new Person
+                {
+                    ID = Int32.Parse(collection["ID"]),
+                    Name = collection["Name"],
+                    Age = Int32.Parse(collection["Age"])
+                };
+
+                _people.Add(person);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -62,7 +69,7 @@ namespace ScaffoldingTests.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                // TODO: Add insert logic here
 
                 return RedirectToAction(nameof(Index));
             }
