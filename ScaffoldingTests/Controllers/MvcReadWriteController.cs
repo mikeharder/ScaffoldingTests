@@ -4,15 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ScaffoldingTests.Models;
 
 namespace ScaffoldingTests.Controllers
 {
     public class MvcReadWriteController : Controller
     {
+        private static readonly List<Person> _people = new List<Person> {
+            new Person { ID=0, Name="Default", Age=19 }
+        };
+
         // GET: MvcReadWrite
         public ActionResult Index()
         {
-            return View();
+            return View(_people);
         }
 
         // GET: MvcReadWrite/Details/5
