@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using ScaffoldingTests.Models;
 
 namespace ScaffoldingTests
 {
@@ -25,6 +27,9 @@ namespace ScaffoldingTests
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddDbContext<ScaffoldingTestsContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ScaffoldingTestsContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
